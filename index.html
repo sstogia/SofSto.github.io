@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Sophia Stogiannidou - Portfolio</title>
+  <meta name="description" content="Portfolio of Sophia Stogiannidou, an Information & Communication Systems Engineer specializing in data privacy, AI, and GDPR compliance.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>">
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    :root {
+      /* Dark Mode (Default) */
+      --bg-color-dark: #121212;
+      --bg-color-light: #1a1a1a;
+      --card-bg-color: #1E1E1E;
+      --primary-text-color: #E0E0E0;
+      --secondary-text-color: #A0A0A0;
+      --accent-color: #3B82F6; 
+      --accent-color-hover: rgba(59, 130, 246, 0.1);
+      --shadow-color: rgba(0, 0, 0, 0.5);
+      --border-color: #333;
+    }
+
+    body.light-mode {
+      /* Light Mode */
+      --bg-color-dark: #f0f2f5;
+      --bg-color-light: #ffffff;
+      --card-bg-color: #ffffff;
+      --primary-text-color: #1a1a1a;
+      --secondary-text-color: #555;
+      --accent-color: #3B82F6;
+      --accent-color-hover: rgba(59, 130, 246, 0.1);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --border-color: #ddd;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color-dark);
+      background-image: linear-gradient(180deg, var(--bg-color-light), var(--bg-color-dark));
+      color: var(--primary-text-color);
+      min-height: 100vh;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 40px;
+      padding-top: 100px;
+      padding-bottom: 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-text-color);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      margin: 0;
+    }
+    #typewriter-container::after {
+        content: '_';
+        font-size: clamp(36px, 6vw, 60px);
+        color: var(--accent-color);
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+        from, to { color: transparent }
+        50% { color: var(--accent-color); }
+    }
+
+    h2 {
+      font-size: clamp(26px, 5vw, 32px);
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+    p {
+      color: var(--secondary-text-color);
+      line-height: 1.6;
+      transition: color 0.3s ease;
+    }
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: var(--primary-text-color);
+    }
+
+    /* --- Floating Navigation --- */
+    .floating-nav {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      background-color: rgba(30, 30, 30, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 10px 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      opacity: 0;
+      animation: slideInFromTop 0.5s ease-out 1.5s forwards;
+    }
+    body.light-mode .floating-nav {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    @keyframes slideInFromTop {
+        from { transform: translateY(-100%); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .floating-nav a, .nav-toggle, .lang-toggle span {
+      color: var(--primary-text-color);
+      font-weight: 500;
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .floating-nav a:hover, .floating-nav a.active-nav, .nav-toggle:hover {
+      color: var(--accent-color);
+    }
+
+    .lang-toggle .lang-option.active-lang {
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    
+    .nav-separator {
+      height: 15px;
+      width: 1px;
+      background-color: var(--border-color);
+    }
+
+    /* --- Header Section --- */
+    .header {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .header .subtitle, .header h1, .header .summary, .header .contact {
+      opacity: 0;
+      animation: fallIn 0.8s ease-out forwards;
+    }
+    .header .subtitle { animation-delay: 0.2s; }
+    .header h1 { animation-delay: 0.5s; }
+    .header .summary { animation-delay: 3.5s; } 
+    .header .contact { animation-delay: 3.7s; }
+
+    @keyframes fallIn {
+      0% { opacity: 0; transform: translateY(-60px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .header .subtitle {
+      font-size: 24px;
+      color: var(--accent-color);
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .header .summary {
+      font-size: 20px;
+      color: var(--secondary-text-color);
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    .contact { 
+      margin-top: 30px; 
+      display: flex;
+      flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+    }
+    .contact a {
+      font-size: 24px;
+      color: var(--secondary-text-color);
+      transition: all 0.3s ease;
+      display: inline-flex; /* Use flex for alignment */
+      align-items: center;
+      gap: 8px;
+    }
+    .contact a:hover {
+      color: var(--accent-color);
+      transform: translateY(-5px);
+    }
+
+    /* CV Button Style */
+    .cv-download-btn {
+        padding: 10px 20px;
+        border: 1px solid var(--accent-color);
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 16px; /* Override icon font-size */
+        color: var(--accent-color);
+    }
+    .cv-download-btn:hover {
+        background-color: var(--accent-color-hover);
+        color: var(--primary-text-color);
+        transform: translateY(-3px); /* Custom hover effect */
+    }
+
+    .contact-item {
+      font-size: 16px; /* Adjust font size of the number */
+      color: var(--secondary-text-color);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-item i {
+      font-size: 24px; /* Keep icon size consistent */
+    }
+
+    /* --- Generic Section --- */
+    .section {
+      margin-bottom: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .section > p:not(.summary) {
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+
+    /* --- Timeline --- */
+    .timeline { width: 100%; max-width: 800px; position: relative; }
+    .timeline::after { content: ''; position: absolute; width: 2px; background-color: var(--border-color); top: 0; bottom: 0; left: 50%; margin-left: -1px; }
+    .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; box-sizing: border-box; }
+    .timeline-item::after { content: ''; position: absolute; width: 16px; height: 16px; right: -8px; background-color: var(--bg-color-light); border: 2px solid var(--accent-color); top: 22px; border-radius: 50%; z-index: 1; }
+    .timeline-left { left: 0; text-align: right;}
+    .timeline-right { left: 50%; text-align: left;}
+    .timeline-left::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; right: 30px; border: medium solid var(--border-color); border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--border-color); }
+    .timeline-right::before { content: " "; height: 0; position: absolute; top: 22px; width: 0; z-index: 1; left: 30px; border: medium solid var(--border-color); border-width: 10px 10px 10px 0; border-color: transparent var(--border-color) transparent transparent; }
+    .timeline-right::after { left: -8px; }
+    .timeline-content { padding: 20px; background-color: var(--card-bg-color); position: relative; border-radius: 8px; }
+    .timeline-content .secondary-text, .timeline-content .thesis-info { font-size: 14px; color: var(--secondary-text-color); margin-top: 5px; }
+    .timeline-content h3 { margin: 0; font-size: 18px; }
+    .timeline-content p { margin: 5px 0 0; }
+    .thesis-info { font-style: italic; }
+    
+    /* --- Project & Certificate Cards --- */
+    .projects-grid, .certificates-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; width: 100%; }
+    .card { background: var(--card-bg-color); padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px var(--shadow-color); transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; text-align: left; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px var(--shadow-color); }
+    .card-title { font-size: 18px; font-weight: 600; color: var(--primary-text-color); margin: 0 0 15px 0; }
+    .card-description { font-size: 15px; color: var(--secondary-text-color); flex-grow: 1; margin-bottom: 0; } /* Set margin-bottom to 0 */
+
+    /* --- Skills Section --- */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 30px; width: 100%; justify-content: center; }
+    .skills-column { flex: 1; min-width: 300px; text-align: left;}
+    .skills-column h3 { color: var(--accent-color); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
+    .skills-column ul { list-style-type: none; padding: 0; }
+    .skills-column li { margin-bottom: 10px; color: var(--secondary-text-color); }
+
+    /* --- Footer Section --- */
+    .footer { text-align: center; }
+    .footer .contact-button {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      border-radius: 4px;
+      margin-top: 20px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .footer .contact-button:hover {
+        background-color: var(--accent-color-hover);
+        color: var(--primary-text-color);
+    }
+
+    /* --- Animation Logic --- */
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .stagger-item { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; transition-delay: var(--stagger-delay); }
+    .stagger-item.visible { opacity: 1; transform: translateY(0); }
+
+    /* --- Responsive --- */
+    @media screen and (max-width: 768px) {
+        .floating-nav { flex-wrap: wrap; justify-content: flex-end; right: 15px; gap: 10px; padding: 8px 10px; }
+        .timeline::after { left: 15px; }
+        .timeline-item { width: 100%; padding-left: 50px; padding-right: 15px; text-align: left;}
+        .timeline-item::before { left: 22px; border: medium solid var(--border-color); border-width: 10px 10px 10px 0; border-color: transparent var(--border-color) transparent transparent; }
+        .timeline-left::after, .timeline-right::after { left: 7px; }
+        .timeline-right, .timeline-left { left: 0%; }
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="particles-js"></div>
+
+  <!-- Floating Navigation -->
+  <nav class="floating-nav">
+    <a href="#about" data-lang="nav_about">About</a>
+    <a href="#experience" data-lang="nav_experience">Experience</a>
+    <a href="#education" data-lang="nav_education">Education</a>
+    <a href="#projects" data-lang="nav_projects">Projects</a>
+    <a href="#skills" data-lang="nav_skills">Skills</a>
+    <a href="#contact" data-lang="nav_contact">Contact</a>
+    <div class="nav-separator"></div>
+    <div class="lang-toggle">
+        <span class="lang-option" id="lang-en">EN</span> | 
+        <span class="lang-option" id="lang-el">GR</span>
+    </div>
+    <i class="fas fa-sun nav-toggle" id="theme-toggle"></i>
+  </nav>
+
+  <div class="container">
+    <section id="home" class="header">
+      <p class="subtitle" data-lang="header_subtitle">Hello, I'm</p>
+      <h1><span id="typewriter-container"></span></h1>
+      <p class="summary" data-lang="header_summary">A recent graduate of Information & Communication Systems Engineering, specializing in the intersection of technology and data privacy. My thesis on ChatGPT and GDPR compliance showcases my passion for building responsible and user-centric solutions.</p>
+      <div class="contact">
+        <!-- ADDED CV DOWNLOAD BUTTON -->
+        <a href="CV_Sophia_Stogiannidou.pdf" download class="cv-download-btn" data-lang="download_cv_button">Download CV</a>
+        
+        <a href="mailto:sofiastogiannidou27@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/%CF%83%CE%BF%CF%86%CE%B9%CE%B1-%CF%83%CF%84%CE%BF%CE%B3%CE%B9%CE%B1%CE%BD%CE%BD%CE%B9%CE%B4%CE%BF%CF%85-328ab32aa/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/StogiannidouSofia" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+   
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+30 698 007 9011</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section fade-in">
+        <h2 data-lang="about_title">About Me</h2>
+        <p data-lang="about_text">As a graduate of the University of the Aegean, I have a strong academic foundation complemented by hands-on experience in software development, system analysis, and data privacy. My recent thesis explored the complexities of AI systems and GDPR, solidifying my expertise in this critical area. I am a goal-oriented and responsible individual, driven by a desire to innovate and contribute effectively to projects that prioritize both technological advancement and regulatory compliance.</p>
+    </section>
+
+    <section id="experience" class="section fade-in">
+        <h2 data-lang="experience_title">Professional Experience</h2>
+        <div class="timeline">
+          <div class="timeline-item timeline-left stagger-item"> <div class="timeline-content"> <h3 data-lang="exp1_title">Customer Supplier</h3> <p data-lang="exp1_company">Flexoplates Papadopoulos, Thessaloniki</p> <p class="secondary-text" data-lang="exp1_date">April 2025 (Planned Start)</p> </div> </div>
+          <div class="timeline-item timeline-right stagger-item"> <div class="timeline-content"> <h3 data-lang="exp2_title">Call Center Agent</h3> <p data-lang="exp2_company">ICall, Thessaloniki</p> <p class="secondary-text" data-lang="exp2_date">Oct 2024 – Feb 2025 (Planned)</p> </div> </div>
+          <div class="timeline-item timeline-left stagger-item"> <div class="timeline-content"> <h3 data-lang="exp3_title">Support Intern</h3> <p data-lang="exp3_company">Twinsoft, Thessaloniki</p> <p class="secondary-text" data-lang="exp3_date">Jul 2024 – Sep 2024 (Planned)</p> </div> </div>
+          <div class="timeline-item timeline-right stagger-item"> <div class="timeline-content"> <h3 data-lang="exp4_title">IT Intern</h3> <p data-lang="exp4_company">EBETH, Thessaloniki</p> <p class="secondary-text" data-lang="exp4_date">Oct 2018 – Jun 2020</p> </div> </div>
+        </div>
+    </section>
+    
+    <section id="education" class="section fade-in">
+        <h2 data-lang="education_title">Education</h2>
+        <div class="timeline">
+          <div class="timeline-item timeline-right stagger-item"> <div class="timeline-content"> <h3 data-lang="edu1_degree">BSc in Information & Communication Systems Engineering</h3> <p data-lang="edu1_university">University of the Aegean, Samos</p> <p class="secondary-text" data-lang="edu1_date">2020 – 2024 (Graduated)</p> <div class="thesis-info" data-lang="edu1_thesis"> Thesis: "The processing of personal data through Artificial Intelligence systems: The case of ChatGPT and Compliance with the GDPR" </div> </div> </div>
+          <div class="timeline-item timeline-left stagger-item"> <div class="timeline-content"> <h3 data-lang="edu2_degree">Diploma in Computer Systems Support</h3> <p data-lang="edu2_university">EPAS OAED, Thessaloniki</p> <p class="secondary-text" data-lang="edu2_date">2018 – 2020 | GPA: 20/20</p> </div> </div>
+          <div class="timeline-item timeline-right stagger-item"> <div class="timeline-content"> <h3 data-lang="edu3_degree">High School Diploma</h3> <p data-lang="edu3_university">General High School, Thessaloniki</p> <p class="secondary-text" data-lang="edu3_date">2015 – 2018 | GPA: 18.2/20</p> </div> </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION: REMOVED CARD FOOTERS -->
+    <section id="projects" class="section fade-in">
+        <h2 data-lang="projects_title">Projects</h2>
+        <div class="projects-grid">
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj7_title">Thesis: AI & GDPR Compliance</h3>
+                <p class="card-description" data-lang="proj7_desc">Analyzed the processing of personal data by AI systems like ChatGPT, focusing on compliance with the General Data Protection Regulation (GDPR) and proposing best practices.</p>
+            </div>
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj1_title">Mobile & Web Application Development</h3>
+                <p class="card-description" data-lang="proj1_desc">Developed a mobile app for agricultural land management and a web app for clinic operations, showcasing full-stack development skills.</p>
+            </div>
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj2_title">Online Booking Platform</h3>
+                <p class="card-description" data-lang="proj2_desc">Designed and implemented a full-featured online booking platform for landowners, complete with a user-friendly interface.</p>
+            </div>
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj3_title">System & Network Analysis</h3>
+                <p class="card-description" data-lang="proj3_desc">Conducted vulnerability analysis on Linux & Windows systems and performed wireless network simulations in Matlab & Cisco Packet Tracer.</p>
+            </div>
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj4_title">Business Website & Database</h3>
+                <p class="card-description" data-lang="proj4_desc">Built a responsive business website using HTML, CSS & JavaScript, supported by a custom database designed and implemented in MySQL.</p>
+            </div>
+            <div class="card stagger-item">
+                <h3 class="card-title" data-lang="proj5_title">ERP & Business Modeling</h3>
+                <p class="card-description" data-lang="proj5_desc">Created an ERP system scenario using Microsoft Navision and developed a comprehensive business model and pitch deck for a startup concept.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section fade-in">
+      <h2 data-lang="skills_title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skills-column">
+          <h3 data-lang="skills_tech_title">Technical Skills</h3>
+          <ul>
+            <li class="stagger-item"><strong>Web Development:</strong> HTML, CSS, JavaScript</li>
+            <li class="stagger-item"><strong>Databases:</strong> MySQL</li>
+            <li class="stagger-item"><strong>System Security:</strong> Linux & Windows Hardening</li>
+            <li class="stagger-item"><strong>Data Privacy:</strong> GDPR Compliance, AI Ethics</li>
+            <li class="stagger-item"><strong>Networking:</strong> Cisco Packet Tracer, Matlab</li>
+            <li class="stagger-item"><strong>Business Systems:</strong> ERP (Microsoft Navision)</li>
+            <li class="stagger-item"><strong>Methodologies:</strong> SSADM, RUP</li>
+          </ul>
+        </div>
+        <div class="skills-column">
+          <h3 data-lang="skills_soft_title">Soft Skills</h3>
+          <ul>
+            <li class="stagger-item" data-lang="soft_skill1">Team Collaboration</li>
+            <li class="stagger-item" data-lang="soft_skill2">Goal-Oriented & Responsible</li>
+            <li class="stagger-item" data-lang="soft_skill3">Organized & Detail-Oriented</li>
+            <li class="stagger-item" data-lang="soft_skill4">Social & Strong Communicator</li>
+            <li class="stagger-item" data-lang="soft_skill5">Innovation & Entrepreneurship</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" class="section fade-in">
+      <h2 data-lang="certificates_title">Selected Certificates</h2>
+       <div class="certificates-grid">
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert1_title">Basic Life Support (BLS)</h3> <p class="card-description" data-lang="cert1_date">2024</p> </div>
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert2_title">Geospatial Semantic Web</h3> <p class="card-description" data-lang="cert2_date">2023</p> </div>
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert3_title">Change Management</h3> <p class="card-description" data-lang="cert3_date">2023</p> </div>
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert4_title">Personal Development</h3> <p class="card-description" data-lang="cert4_desc">Motivation, Goal Setting, and Boundaries (2023)</p> </div>
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert5_title">Effective HR Management</h3> <p class="card-description" data-lang="cert5_date">2020</p> </div>
+            <div class="card stagger-item"> <h3 class="card-title" data-lang="cert6_title">Sales & Negotiation</h3> <p class="card-description" data-lang="cert6_date">2020</p> </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section footer fade-in">
+      <h2 data-lang="contact_title">Get In Touch</h2>
+      <p data-lang="contact_text">I'm actively seeking opportunities to apply my skills and contribute to exciting projects. If you'd like to collaborate or discuss a potential role, please feel free to reach out!</p>
+      
+      <a href="mailto:sofiastogiannidou27@gmail.com" class="contact-button" data-lang="contact_button">Say Hello</a>
+
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // UPDATED TRANSLATIONS OBJECT
+      const translations = {
+        en: {
+          nav_about: "About",
+          nav_experience: "Experience",
+          nav_education: "Education",
+          nav_projects: "Projects",
+          nav_skills: "Skills",
+          nav_contact: "Contact",
+          download_cv_button: "Download CV",
+          header_subtitle: "Hello, I'm",
+          header_summary: "A recent graduate of Information & Communication Systems Engineering, specializing in the intersection of technology and data privacy. My thesis on ChatGPT and GDPR compliance showcases my passion for building responsible and user-centric solutions.",
+          about_title: "About Me",
+          about_text: "As a graduate of the University of the Aegean, I have a strong academic foundation complemented by hands-on experience in software development, system analysis, and data privacy. My recent thesis explored the complexities of AI systems and GDPR, solidifying my expertise in this critical area. I am a goal-oriented and responsible individual, driven by a desire to innovate and contribute effectively to projects that prioritize both technological advancement and regulatory compliance.",
+          experience_title: "Professional Experience",
+          exp1_title: "Customer Supplier",
+          exp1_company: "Flexoplates Papadopoulos, Thessaloniki",
+          exp1_date: "April 2025 (Planned Start)",
+          exp2_title: "Call Center Agent",
+          exp2_company: "ICall, Thessaloniki",
+          exp2_date: "Oct 2024 – Feb 2025 (Planned)",
+          exp3_title: "Support Intern",
+          exp3_company: "Twinsoft, Thessaloniki",
+          exp3_date: "Jul 2024 – Sep 2024 (Planned)",
+          exp4_title: "IT Intern",
+          exp4_company: "EBETH, Thessaloniki",
+          exp4_date: "Oct 2018 – Jun 2020",
+          education_title: "Education",
+          edu1_degree: "BSc in Information & Communication Systems Engineering",
+          edu1_university: "University of the Aegean, Samos",
+          edu1_date: "2020 – 2024 (Graduated)",
+          edu1_thesis: `Thesis: "The processing of personal data through Artificial Intelligence systems: The case of ChatGPT and Compliance with the GDPR"`,
+          edu2_degree: "Diploma in Computer Systems Support",
+          edu2_university: "EPAS OAED, Thessaloniki",
+          edu2_date: "2018 – 2020 | GPA: 20/20",
+          edu3_degree: "High School Diploma",
+          edu3_university: "General High School, Thessaloniki",
+          edu3_date: "2015 – 2018 | GPA: 18.2/20",
+          projects_title: "Projects",
+          proj7_title: "Thesis: AI & GDPR Compliance",
+          proj7_desc: "Analyzed the processing of personal data by AI systems like ChatGPT, focusing on compliance with the General Data Protection Regulation (GDPR) and proposing best practices.",
+          proj1_title: "Mobile & Web Application Development",
+          proj1_desc: "Developed a mobile app for agricultural land management and a web app for clinic operations, showcasing full-stack development skills.",
+          proj2_title: "Online Booking Platform",
+          proj2_desc: "Designed and implemented a full-featured online booking platform for landowners, complete with a user-friendly interface.",
+          proj3_title: "System & Network Analysis",
+          proj3_desc: "Conducted vulnerability analysis on Linux & Windows systems and performed wireless network simulations in Matlab & Cisco Packet Tracer.",
+          proj4_title: "Business Website & Database",
+          proj4_desc: "Built a responsive business website using HTML, CSS & JavaScript, supported by a custom database designed and implemented in MySQL.",
+          proj5_title: "ERP & Business Modeling",
+          proj5_desc: "Created an ERP system scenario using Microsoft Navision and developed a comprehensive business model and pitch deck for a startup concept.",
+          skills_title: "Skills",
+          skills_tech_title: "Technical Skills",
+          skills_soft_title: "Soft Skills",
+          soft_skill1: "Team Collaboration",
+          soft_skill2: "Goal-Oriented & Responsible",
+          soft_skill3: "Organized & Detail-Oriented",
+          soft_skill4: "Social & Strong Communicator",
+          soft_skill5: "Innovation & Entrepreneurship",
+          certificates_title: "Selected Certificates",
+          cert1_title: "Basic Life Support (BLS)",
+          cert1_date: "2024",
+          cert2_title: "Geospatial Semantic Web",
+          cert2_date: "2023",
+          cert3_title: "Change Management",
+          cert3_date: "2023",
+          cert4_title: "Personal Development",
+          cert4_desc: "Motivation, Goal Setting, and Boundaries (2023)",
+          cert5_title: "Effective HR Management",
+          cert5_date: "2020",
+          cert6_title: "Sales & Negotiation",
+          cert6_date: "2020",
+          contact_title: "Get In Touch",
+          contact_text: "I'm actively seeking opportunities to apply my skills and contribute to exciting projects. If you'd like to collaborate or discuss a potential role, please feel free to reach out!",
+          contact_button: "Say Hello",
+        },
+        el: {
+          nav_about: "Σχετικά",
+          nav_experience: "Εμπειρία",
+          nav_education: "Εκπαίδευση",
+          nav_projects: "Έργα",
+          nav_skills: "Δεξιότητες",
+          nav_contact: "Επικοινωνία",
+          download_cv_button: "Λήψη Βιογραφικού",
+          header_subtitle: "Γεια σας, είμαι η",
+          header_summary: "Πρόσφατη απόφοιτος του τμήματος Μηχανικών Πληροφοριακών & Επικοινωνιακών Συστημάτων, με εξειδίκευση στη διασταύρωση τεχνολογίας και ιδιωτικότητας δεδομένων. Η διπλωματική μου εργασία πάνω στο ChatGPT και τον GDPR αναδεικνύει το πάθος μου για τη δημιουργία υπεύθυνων και ανθρωποκεντρικών λύσεων.",
+          about_title: "Σχετικά με Εμένα",
+          about_text: "Ως απόφοιτος του Πανεπιστημίου Αιγαίου, διαθέτω ισχυρό ακαδημαϊκό υπόβαθρο που συμπληρώνεται από πρακτική εμπειρία στην ανάπτυξη λογισμικού, την ανάλυση συστημάτων και την ιδιωτικότητα δεδομένων. Η πρόσφατη διπλωματική μου διερεύνησε την πολυπλοκότητα των συστημάτων Τεχνητής Νοημοσύνης και του GDPR, εδραιώνοντας την τεχνογνωσία μου σε αυτόν τον κρίσιμο τομέα. Είμαι ένα άτομο προσανατολισμένο στους στόχους και υπεύθυνο, με κίνητρο την καινοτομία και την αποτελεσματική συνεισφορά σε έργα που δίνουν προτεραιότητα τόσο στην τεχνολογική πρόοδο όσο και στη συμμόρφωση με τους κανονισμούς.",
+          experience_title: "Επαγγελματική Εμπειρία",
+          exp1_title: "Εξυπηρέτηση Πελατών & Προμηθευτών",
+          exp1_company: "Flexoplates Παπαδόπουλος, Θεσσαλονίκη",
+          exp1_date: "Απρίλιος 2025 (Προγραμματισμένη Έναρξη)",
+          exp2_title: "Υπάλληλος Τηλεφωνικού Κέντρου",
+          exp2_company: "ICall, Θεσσαλονίκη",
+          exp2_date: "Οκτ 2024 – Φεβ 2025 (Προγραμματισμένο)",
+          exp3_title: "Ασκούμενη Τεχνικής Υποστήριξης",
+          exp3_company: "Twinsoft, Θεσσαλονίκη",
+          exp3_date: "Ιουλ 2024 – Σεπ 2024 (Προγραμματισμένο)",
+          exp4_title: "Ασκούμενη Πληροφορικής",
+          exp4_company: "ΕΒΕΘ, Θεσσαλονίκη",
+          exp4_date: "Οκτ 2018 – Ιουν 2020",
+          education_title: "Εκπαίδευση",
+          edu1_degree: "Πτυχίο Μηχανικών Πληροφοριακών & Επικοινωνιακών Συστημάτων",
+          edu1_university: "Πανεπιστήμιο Αιγαίου, Σάμος",
+          edu1_date: "2020 – 2024 (Αποφοίτησε)",
+          edu1_thesis: `Διπλωματική: «Η επεξεργασία προσωπικών δεδομένων μέσω συστημάτων Τεχνητής Νοημοσύνης: Η περίπτωση του ChatGPT και η Συμμόρφωση με τον GDPR»`,
+          edu2_degree: "Δίπλωμα Υποστήριξης Συστημάτων Πληροφορικής",
+          edu2_university: "ΕΠΑΣ ΟΑΕΔ, Θεσσαλονίκη",
+          edu2_date: "2018 – 2020 | Βαθμός: 20/20",
+          edu3_degree: "Απολυτήριο Γενικού Λυκείου",
+          edu3_university: "Γενικό Λύκειο, Θεσσαλονίκη",
+          edu3_date: "2015 – 2018 | Βαθμός: 18.2/20",
+          projects_title: "Έργα",
+          proj7_title: "Διπλωματική: AI & Συμμόρφωση GDPR",
+          proj7_desc: "Ανάλυση της επεξεργασίας προσωπικών δεδομένων από συστήματα ΤΝ όπως το ChatGPT, με έμφαση στη συμμόρφωση με τον Γενικό Κανονισμό Προστασίας Δεδομένων (GDPR) και πρόταση βέλτιστων πρακτικών.",
+          proj1_title: "Ανάπτυξη Mobile & Web Εφαρμογών",
+          proj1_desc: "Ανάπτυξη mobile εφαρμογής για διαχείριση αγροτεμαχίων και web εφαρμογής για λειτουργίες ιατρείου, επιδεικνύοντας δεξιότητες full-stack.",
+          proj2_title: "Διαδικτυακή Πλατφόρμα Κρατήσεων",
+          proj2_desc: "Σχεδιασμός και υλοποίηση μιας πλήρως λειτουργικής πλατφόρμας κρατήσεων για ιδιοκτήτες γης, με φιλικό προς τον χρήστη περιβάλλον.",
+          proj3_title: "Ανάλυση Συστημάτων & Δικτύων",
+          proj3_desc: "Διεξαγωγή ανάλυσης ευπαθειών σε συστήματα Linux & Windows και προσομοιώσεις ασύρματων δικτύων σε Matlab & Cisco Packet Tracer.",
+          proj4_title: "Εταιρική Ιστοσελίδα & Βάση Δεδομένων",
+          proj4_desc: "Κατασκευή responsive εταιρικής ιστοσελίδας με HTML, CSS & JavaScript, υποστηριζόμενη από μια προσαρμοσμένη βάση δεδομένων σε MySQL.",
+          proj5_title: "ERP & Επιχειρηματική Μοντελοποίηση",
+          proj5_desc: "Δημιουργία σεναρίου συστήματος ERP με Microsoft Navision και ανάπτυξη ολοκληρωμένου επιχειρηματικού μοντέλου και pitch deck για μια startup.",
+          skills_title: "Δεξιότητες",
+          skills_tech_title: "Τεχνικές Δεξιότητες",
+          skills_soft_title: "Ήπιες Δεξιότητες",
+          soft_skill1: "Ομαδική Συνεργασία",
+          soft_skill2: "Προσανατολισμός στον Στόχο & Υπευθυνότητα",
+          soft_skill3: "Οργάνωση & Προσοχή στη Λεπτομέρεια",
+          soft_skill4: "Κοινωνικότητα & Ισχυρή Επικοινωνία",
+          soft_skill5: "Καινοτομία & Επιχειρηματικότητα",
+          certificates_title: "Επιλεγμένες Πιστοποιήσεις",
+          cert1_title: "Βασική Υποστήριξη Ζωής (BLS)",
+          cert1_date: "2024",
+          cert2_title: "Γεωχωρικός Σημασιολογικός Ιστός",
+          cert2_date: "2023",
+          cert3_title: "Διαχείριση Αλλαγών",
+          cert3_date: "2023",
+          cert4_title: "Προσωπική Ανάπτυξη",
+          cert4_desc: "Κίνητρα, Θέσπιση Στόχων και Όρια (2023)",
+          cert5_title: "Αποτελεσματική Διαχείριση HR",
+          cert5_date: "2020",
+          cert6_title: "Πωλήσεις & Διαπραγματεύσεις",
+          cert6_date: "2020",
+          contact_title: "Επικοινωνήστε",
+          contact_text: "Αναζητώ ενεργά ευκαιρίες για να εφαρμόσω τις δεξιότητές μου και να συμβάλω σε ενδιαφέροντα έργα. Εάν θέλετε να συνεργαστούμε ή να συζητήσουμε έναν πιθανό ρόλο, μη διστάσετε να επικοινωνήσετε!",
+          contact_button: "Στείλτε Μήνυμα",
+        }
+      };
+
+      const themeToggle = document.getElementById('theme-toggle');
+      const langEn = document.getElementById('lang-en');
+      const langEl = document.getElementById('lang-el');
+      let currentTheme = localStorage.getItem('theme') || 'dark';
+      
+      const loadParticles = (theme) => {
+        const particleColor = theme === 'light' ? '#555555' : '#ffffff';
+        tsParticles.load("particles-js", {
+            fpsLimit: 60,
+            interactivity: { events: { onHover: { enable: true, mode: "grab" }, resize: true, }, modes: { grab: { distance: 140, links: { opacity: 0.5 } }, }, },
+            particles: { color: { value: particleColor }, links: { color: particleColor, distance: 150, enable: true, opacity: 0.2, width: 1 }, move: { direction: "none", enable: true, outModes: "out", random: false, speed: 1, straight: false }, number: { density: { enable: true, area: 800 }, value: 60 }, opacity: { value: 0.3 }, shape: { type: "circle" }, size: { value: { min: 1, max: 2 } }, },
+            detectRetina: true,
+        });
+      };
+
+      document.body.classList.toggle('light-mode', currentTheme === 'light');
+      themeToggle.classList.toggle('fa-moon', currentTheme === 'light');
+      themeToggle.classList.toggle('fa-sun', currentTheme === 'dark');
+      loadParticles(currentTheme);
+
+      const currentLang = localStorage.getItem('language') || 'en';
+      
+      function setLanguage(lang) {
+        document.querySelectorAll('[data-lang]').forEach(el => {
+          const key = el.getAttribute('data-lang');
+          if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+          }
+        });
+        document.documentElement.lang = lang;
+        localStorage.setItem('language', lang);
+        langEn.classList.toggle('active-lang', lang === 'en');
+        langEl.classList.toggle('active-lang', lang === 'el');
+      }
+      setLanguage(currentLang);
+
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light-mode');
+        currentTheme = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+        themeToggle.classList.toggle('fa-sun');
+        themeToggle.classList.toggle('fa-moon');
+        localStorage.setItem('theme', currentTheme);
+        loadParticles(currentTheme);
+      });
+
+      langEn.addEventListener('click', () => setLanguage('en'));
+      langEl.addEventListener('click', () => setLanguage('el'));
+      
+      const typewriterElement = document.getElementById('typewriter-container');
+      const textToType = "Sophia Stogiannidou.";
+      let index = 0;
+      function type() {
+          if (index < textToType.length) {
+              typewriterElement.innerHTML += textToType.charAt(index);
+              index++;
+              setTimeout(type, 100);
+          }
+      }
+      setTimeout(type, 800); 
+
+      const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('visible');
+          const staggerItems = entry.target.querySelectorAll('.stagger-item');
+          if (staggerItems.length > 0) {
+            staggerItems.forEach((item, index) => {
+              item.style.setProperty('--stagger-delay', `${index * 100}ms`);
+              item.classList.add('visible');
+            });
+          }
+          observer.unobserve(entry.target);
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach(section => observer.observe(section));
+
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.floating-nav a');
+      const activateNavLink = () => {
+        let currentSection = 'home';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 150) {
+            currentSection = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          link.classList.remove('active-nav');
+          if(link.getAttribute('href') === `#${currentSection}`) {
+            link.classList.add('active-nav');
+          }
+        });
+      };
+      window.addEventListener('scroll', activateNavLink);
+      activateNavLink();
+    });
+  </script>
+</body>
+</html>
